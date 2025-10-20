@@ -8,6 +8,9 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{B87C8363-D98A-4E3F-808F-225CF8F8CFA1}|..\\Class1st (Single Linked List)\\Class1st (Single Linked List).vcxproj|C:\\Users\\hkdav\\OneDrive\\Desktop\\Game_programming4\\Class1st (Single Linked List)\\Source.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51759265-504F-4FF1-9B3B-2E65B87EBFEE}|..\\Class2nd (Double Linked List)\\Class2nd (Double Linked List).vcxproj|C:\\Users\\hkdav\\OneDrive\\Desktop\\Game_programming4\\Class2nd (Double Linked List)\\Source.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,8 +20,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Source.cpp",
+              "DocumentMoniker": "C:\\Users\\hkdav\\OneDrive\\Desktop\\Game_programming4\\Class2nd (Double Linked List)\\Source.cpp",
+              "RelativeDocumentMoniker": "..\\Class2nd (Double Linked List)\\Source.cpp",
+              "ToolTip": "C:\\Users\\hkdav\\OneDrive\\Desktop\\Game_programming4\\Class2nd (Double Linked List)\\Source.cpp",
+              "RelativeToolTip": "..\\Class2nd (Double Linked List)\\Source.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-20T09:23:26.414Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -27,7 +43,7 @@
               "RelativeDocumentMoniker": "..\\Class1st (Single Linked List)\\Source.cpp",
               "ToolTip": "C:\\Users\\hkdav\\OneDrive\\Desktop\\Game_programming4\\Class1st (Single Linked List)\\Source.cpp",
               "RelativeToolTip": "..\\Class1st (Single Linked List)\\Source.cpp",
-              "ViewState": "AgIAAD8AAAAAAAAAAADwv1wAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-16T10:26:54.156Z",
               "EditorCaption": ""
@@ -40,7 +56,7 @@
               "RelativeDocumentMoniker": "Program.cpp",
               "ToolTip": "C:\\Users\\hkdav\\OneDrive\\Desktop\\Game_programming4\\Program\\Program.cpp",
               "RelativeToolTip": "Program.cpp",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAAAJMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAmwFwAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-15T09:07:25.306Z",
               "EditorCaption": ""
