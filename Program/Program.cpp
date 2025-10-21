@@ -3,108 +3,32 @@
 using namespace std;
 
 template<typename T>
-class List
+class Vector
 {
 private:
-    struct Node
-    {
-        T data;
-        Node* next;
-    };
+    int count;
+    int capacity;
 
-    int size;
-
-    Node* head;
-
+    T* pointer;
+    
 public:
-    List()
+    Vector()
     {
-        size = 0;
-        head = nullptr;
+        count = 0;
+        capacity = 0;
+        pointer = nullptr;
     }
 
-    void push_back(T data)
+    void resize(int newSize)
     {
-        Node* newNode = new Node;
-
-        newNode->data = data;
-
-        if (head == nullptr)
-        {
-            head = newNode;
-            newNode->next = head;
-        }
-        else
-        {
-            newNode->next = head->next;
-            head->next = newNode;
-            head = newNode;
-        }
-
-        size++;
-    }
-
-    void push_front(T data)
-    {
-        Node* newNode = new Node;
-
-        newNode->data = data;
-
-        if (head == nullptr)
-        {
-            head = newNode;
-            newNode->next = head;
-        }
-        else
-        {
-            newNode->next = head->next;
-            head->next = newNode;
-        }
-
-        size++;
+        capacity = newSize;
 
     }
-
-    void pop_front()
-    {
-        if (head == nullptr)
-        {
-            cout << "Linked list is empty.__pop_front" << endl;
-        }
-        else
-        {
-            Node* deleteNode = head->next;
-
-            if(head != deleteNode)
-            {
-                head->next = deleteNode->next;
-            }
-            else
-            {
-                head = nullptr;
-            }
-
-            delete deleteNode;
-
-            size--;
-        }
-    }
-
 };
 
 int main()
 {
-    List<int> list;
-
-    //list.push_back(10);
-    //list.push_back(20);
-
-    list.push_front(5);
-    list.push_front(1);
-
-    list.pop_front();
-    list.pop_front();
-    list.pop_front();
+    Vector<int> vector;
 
     return 0;
 }
