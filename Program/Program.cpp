@@ -3,32 +3,24 @@
 using namespace std;
 
 template<typename T>
-class Vector
+class Stack
 {
 private:
-    int count;
+    int highset;
     int capacity;
 
-    T* pointer;
-    
+    T* container;
+
 public:
-    Vector()
+    Stack()
     {
-        count = 0;
+        highset = -1;
         capacity = 0;
-        pointer = nullptr;
-    }
-
-    void resize(int newSize)
-    {
-        capacity = newSize;
-
+       container = nullptr;
     }
 };
 
 int main()
 {
-    Vector<int> vector;
-
     return 0;
 }
