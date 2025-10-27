@@ -2,111 +2,80 @@
 
 using namespace std;
 
-#define SIZE 4
-
 template<typename T>
-class Queue
+
+class PriorityQueue
 {
 private:
-    int front;
-    int rear;
+    int index;
+    int capacity;
 
-    T container[SIZE];
-
+    T* container;
 public:
-    Queue()
+    PriorityQueue()
     {
-        front = SIZE-1;
-        rear = SIZE-1;
-        for (int i = 0;i < SIZE;i++)
-        {
-            container[i] = NULL;
-        }
+        index = 0;
+        capacity = 0;
+        container = nullptr;
     }
-
-    const bool& empty()
+    void resize(int newSize)
     {
-        return front == rear;
-    }
+        capacity = newSize;
+        T* temporary = new T[capacity];
 
-    const T& peek()
-    {
-        if (empty())
+        for (int i = 0; i < capacity;i++)
         {
-            exit(1);
+            temporary[i] = NULL;
         }
-        else
-        {
-            return container[(front + 1) % SIZE];
-        }
-    }
 
-    //프론트 이전 까지만 푸쉬가 가능하다. 
-    //기본 상태에서 3은 불가, 0,1,2에만 값이 들어간다.
+        for (int i = 0; i < index; i++)
+        {
+            temporary[i] = container[i];
+        }
+
+        delete[] container;
+
+        container = temporary;
+
+    }
     void push(T data)
     {
-        if (front == (rear+1) % SIZE )
+        if (capacity <= 0)
         {
-            cout << "overflow" << endl;
+            resize(1);
         }
-        else
+        else if (index >= capacity)
         {
-            rear = (rear + 1) % SIZE;
-            container[rear] = data;
+            resize(capacity * 2);
         }
-    }
+        container[index++] = data;
 
-    //팝의 경우 프론트++를 널로 바꾼다.
-    //기본 프론트는 사이즈-1이므로 첫 팝에서 0이 널이 된다.
-    void pop()
-    {
-        if (empty())
-        {
-            cout << "Queue is empty" << endl;
-        }
-        else
-        {
-            front = (front + 1) % SIZE;
+        int child = index - 1;
+        int parent = (child - 1) / 2;
 
-            container[front] = NULL;
-        }
-    }
-
-    const int& size()
-    {
-        int count = 0;
-        for (int i = 0;i < SIZE;i++)
+        while (child > 0)
         {
-            if (container[i] != NULL)
+            if (container[parent] < container[child])
             {
-                count++;
+                std::swap(container[parent], container[child]);
             }
-        }
-        return count;
-    }
 
+            child = parent;
+            parent = (child - 1) / 2;
+        }
+    }
 };
+
 
 int main()
 {
-    Queue<int> queue;
+    PriorityQueue<int> priorityQueue;
 
-    queue.push(10);
-    queue.push(20);
-    queue.push(30);
-    queue.push(40);
-    //queue.push(50);
-    //queue.push(60);
-    //
-    cout << queue.empty()<<endl;
-    //
-    while (queue.empty() == false)
-    {
-        cout << queue.peek() << endl;
-        queue.pop();
-    }
-    //
-    //cout << "size: " << queue.size() << endl;
+    priorityQueue.push(10);
+    priorityQueue.push(20);
+    priorityQueue.push(5);
+    priorityQueue.push(33);
+    
 
     return 0;
 }
