@@ -61,6 +61,90 @@ public:
     }
 
     void insert(KEY key, VALUE value)
+    {
+        //해시 함수를 통해서 값을 받는 임시 변수
+        int hashIndex = hash_function(key);
+
+        //새로운 노드 생성
+        Node* newNode = new Node;
+        newNode->key = key;
+        newNode->value = value;
+        newNode->next = nullptr;
+
+        //노드가 1개라도 존재하지 않는다면
+        if (bucket[hashIndex].count == 0)
+        {
+            //bucket[hashIndex]의 head 포인터가 newNode를 가리키게 합니다.
+            bucket[hashIndex].head = newNode;
+        }
+        else
+        {
+            newNode->next = bucket[hashIndex].head;
+            bucket[hashIndex].head = newNode;
+        }
+
+        //bucket[hashIndex]의 count 증가
+        bucket[hashIndex].count++;
+
+    }
+
+    void erase(KEY key)
+    {
+        //1. 해시 함수를 통해서 값을 받는 임시 변수
+        int hashIndex = hash_function(key);
+
+        //2. Node를 탐색할 수 있는 포인터 변수 선언
+        Node* currentNode = bucket[hashIndex].head;
+
+        //3. 이전 Node를 저장할 수 있는 포인터 변수 선언
+        Node* previousNode = nullptr;
+
+        //4. currentNode가 nullptr과 같다면 함수를 종료
+        if (currentNode == nullptr)
+        {
+            cout << "not key found..." << endl;
+        }
+        else
+        {
+            //5.currentNode를 이용해 내가 찾고자 하는 key 값을 찾습니다.
+            while (currentNode != nullptr)
+            {
+                if (currentNode->key == key)
+                {
+                    if (currentNode == bucket[hashIndex].head)
+                    {
+                        bucket[hashIndex].head = currentNode->next;
+                    }
+                    else
+                    {
+                        previousNode->next = currentNode->next;
+                    }
+
+                    size--;
+
+                    bucket[hashIndex].count--;
+
+                    delete currentNode;
+
+                    return;
+                }
+                else
+                {
+                    previousNode = currentNode;
+                    currentNode = currentNode->next;
+                }
+            }
+            cout << "not key found..." << endl;
+        }
+    }
+
+    const float& load_factor()
+    {
+        return(float)size / capacity;
+    }
+        
+    const int& bucket_count()
+    { }
 };
 
 
@@ -68,9 +152,12 @@ int main()
 {
     HashTable<const char*, int>hashtable;
 
-    cout << hashtable.hash_function("Korea") << endl;
-    cout<<hashtable.hash_function("Brazil")<<endl;
-    cout<<hashtable.hash_function("China")<<endl;
+    hashtable.insert("mask", 3000);
+    hashtable.insert("cinder", 1000);
+    hashtable.insert("vest", 800);
+
+    hashtable.erase("mask");
+    hashtable.erase("force");
 
     return 0;
 }
