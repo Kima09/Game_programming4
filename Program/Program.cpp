@@ -2,162 +2,51 @@
 
 using namespace std;
 
-template<typename KEY, typename VALUE>
-class HashTable
+template<typename T>
+class Graph
 {
 private:
-    struct Node
-    {
-        KEY key;
-        VALUE value;
+    int size;//정점 개수
+    int count;//인접 행렬 크기
+    int capacity;//최대 용량
 
-        Node* next;
-    };
-
-    struct Bucket
-    {
-        int count;
-        Node* head;
-    };
-
-    int size;
-    int capacity;
-    
-    Bucket* bucket;
+    T* vertex;//정점의 집합
+    int** matrix;//인접 행렬
 
 public:
-    HashTable()
+    Graph()
     {
         size = 0;
-        capacity = 8;
+        count = 0;
+        capacity = 0;
 
-        bucket = new Bucket[capacity];
-
-        for (int i = 0; i < capacity;i++)
-        {
-            bucket[i].head = nullptr;
-            bucket[i].count = 0;
-        }
+        vertex = nullptr;
+        matrix = nullptr;
     }
 
-    template<typename KEY>
-    unsigned int hash_function(KEY key)
-    {
-        return (unsigned int)key % capacity;
-    }
-
-    template<>
-    unsigned int hash_function(const char* key)
-    {
-        int sum = 0;
-        for (int i = 0;*key != '\0';i++)
-        {
-            sum += key[i];
-
-            key = key + 1;
-        }
-
-        return (unsigned int)sum % capacity;
-    }
-
-    void insert(KEY key, VALUE value)
-    {
-        //해시 함수를 통해서 값을 받는 임시 변수
-        int hashIndex = hash_function(key);
-
-        //새로운 노드 생성
-        Node* newNode = new Node;
-        newNode->key = key;
-        newNode->value = value;
-        newNode->next = nullptr;
-
-        //노드가 1개라도 존재하지 않는다면
-        if (bucket[hashIndex].count == 0)
-        {
-            //bucket[hashIndex]의 head 포인터가 newNode를 가리키게 합니다.
-            bucket[hashIndex].head = newNode;
-        }
-        else
-        {
-            newNode->next = bucket[hashIndex].head;
-            bucket[hashIndex].head = newNode;
-        }
-
-        //bucket[hashIndex]의 count 증가
-        bucket[hashIndex].count++;
-
-    }
-
-    void erase(KEY key)
-    {
-        //1. 해시 함수를 통해서 값을 받는 임시 변수
-        int hashIndex = hash_function(key);
-
-        //2. Node를 탐색할 수 있는 포인터 변수 선언
-        Node* currentNode = bucket[hashIndex].head;
-
-        //3. 이전 Node를 저장할 수 있는 포인터 변수 선언
-        Node* previousNode = nullptr;
-
-        //4. currentNode가 nullptr과 같다면 함수를 종료
-        if (currentNode == nullptr)
-        {
-            cout << "not key found..." << endl;
-        }
-        else
-        {
-            //5.currentNode를 이용해 내가 찾고자 하는 key 값을 찾습니다.
-            while (currentNode != nullptr)
-            {
-                if (currentNode->key == key)
-                {
-                    if (currentNode == bucket[hashIndex].head)
-                    {
-                        bucket[hashIndex].head = currentNode->next;
-                    }
-                    else
-                    {
-                        previousNode->next = currentNode->next;
-                    }
-
-                    size--;
-
-                    bucket[hashIndex].count--;
-
-                    delete currentNode;
-
-                    return;
-                }
-                else
-                {
-                    previousNode = currentNode;
-                    currentNode = currentNode->next;
-                }
-            }
-            cout << "not key found..." << endl;
-        }
-    }
-
-    const float& load_factor()
-    {
-        return(float)size / capacity;
-    }
-        
-    const int& bucket_count()
-    { }
 };
+
 
 
 int main()
 {
-    HashTable<const char*, int>hashtable;
-
-    hashtable.insert("mask", 3000);
-    hashtable.insert("cinder", 1000);
-    hashtable.insert("vest", 800);
-
-    hashtable.erase("mask");
-    hashtable.erase("force");
+    //그래프의 표현
+    // 
+    //인접 행렬
+    //2차원 배열로 그래프를 나타내는 자료 구조
+    //노드의 개수를 n이라고 할 때 n*n 크기의 행렬을 사용해
+    //노드 사이의 연결을 표현
+    // 연결된 노드끼리는 1, 단절은 0
+    // 
+    // 0 - 1
+    //    /ㅣ
+    // 3 - 2
+    // 
+    //     0  1  2  3
+    // 0  0  1  0  0
+    // 1  1  0  1  1
+    // 2  0  1  0  1
+    // 3  0  1  1  0
 
     return 0;
 }
