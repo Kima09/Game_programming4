@@ -24,6 +24,47 @@ public:
         matrix = nullptr;
     }
 
+    void resize(int newSize)
+    {
+        capacity = newSize;
+        T* container = new T[capacity];
+
+        for (int i = 0; i < capacity;i++)
+        {
+            container[i] = NULL;
+        }
+
+        for (int i = 0; i < size; i++)
+        {
+            container[i] = vertex[i];
+        }
+
+        delete[] vertex;
+
+        vertex = container;
+    }
+
+    void push(T data)
+    {
+        if (capacity <= 0)
+        {
+            resize(1);
+        }
+        else if (size >= capacity)
+        {
+            resize(capacity * 2);
+        }
+
+        vertex[size++] = data;
+    }
+
+    void edge(int i, int j)
+    {
+        if (vertex[0] = NULL)
+        {
+            cout << "adjacency matrix is empty" << endl;
+        }
+    }
 };
 
 
@@ -47,6 +88,12 @@ int main()
     // 1  1  0  1  1
     // 2  0  1  0  1
     // 3  0  1  1  0
+
+    Graph<char> graph;
+
+    graph.push('A');
+    graph.push('B');
+    graph.push('C');
 
     return 0;
 }
