@@ -24,6 +24,29 @@ public:
         matrix = nullptr;
     }
 
+    void resize()
+    {
+        int** newMatrix = new int* [size];
+        for (int i = 0;i < size;i++)
+        {
+            newMatrix[i] = new int[size] {0};
+        }
+        for (int i = 0;i < count;i++)
+        {
+            for (int j = 0;j < count;j++)
+            {
+                newMatrix[i][j] = matrix[i][j];
+            }
+        }
+        for (int i = 0;i < count;i++)
+        {
+            delete[] matrix[i];
+        }
+        delete[] matrix;
+        matrix = newMatrix;
+        count = size;
+    }
+
     void resize(int newSize)
     {
         capacity = newSize;
@@ -60,11 +83,48 @@ public:
 
     void edge(int i, int j)
     {
-        if (vertex[0] = NULL)
+        if (size <= 0)
         {
             cout << "adjacency matrix is empty" << endl;
         }
+        else if (i >= size || j >= size)
+        {
+            cout << "index out of range" << endl;
+        }
+        else
+        {
+            if (matrix == nullptr)
+            {
+                count = size;
+                matrix = new int* [size];
+                for (int i = 0;i < size;i++)
+                {
+                    matrix[i] = new int[size];
+                    for (int j = 0;j < size;j++)
+                    {
+                        matrix[i][j] = 0;
+                    }
+                }
+            }
+            else if (count < size)
+            {
+                resize();
+            }
+        }
+        matrix[i][j] = 1;
+        matrix[j][i] = 1;
     }
+
+    ~Graph()
+    {
+        for (int i = 0;i < count;i++)
+        {
+            delete[] matrix[i];
+        }
+        delete[] matrix;
+        delete[] vertex;
+    }
+
 };
 
 
@@ -94,6 +154,9 @@ int main()
     graph.push('A');
     graph.push('B');
     graph.push('C');
+
+    graph.edge(0, 1);
+    graph.edge(1, 2);
 
     return 0;
 }
