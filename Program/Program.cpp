@@ -6,12 +6,22 @@ template<typename T>
 class Graph
 {
 private:
+    struct Node
+    {
+        T data;
+        Node* next;
+        Node(T data, Node* link = nullptr)
+        {
+            this->data = data;
+            next = link;
+        }
+    };
     int size;//정점 개수
-    int count;//인접 행렬 크기
+    int count;//인접 리스트의 크기
     int capacity;//최대 용량
 
     T* vertex;//정점의 집합
-    int** matrix;//인접 행렬
+    Node** list;//인접 리스트
 
 public:
     Graph()
@@ -19,32 +29,8 @@ public:
         size = 0;
         count = 0;
         capacity = 0;
-
+        list = nullptr;
         vertex = nullptr;
-        matrix = nullptr;
-    }
-
-    void resize()
-    {
-        int** newMatrix = new int* [size];
-        for (int i = 0;i < size;i++)
-        {
-            newMatrix[i] = new int[size] {0};
-        }
-        for (int i = 0;i < count;i++)
-        {
-            for (int j = 0;j < count;j++)
-            {
-                newMatrix[i][j] = matrix[i][j];
-            }
-        }
-        for (int i = 0;i < count;i++)
-        {
-            delete[] matrix[i];
-        }
-        delete[] matrix;
-        matrix = newMatrix;
-        count = size;
     }
 
     void resize(int newSize)
@@ -93,70 +79,21 @@ public:
         }
         else
         {
-            if (matrix == nullptr)
-            {
-                count = size;
-                matrix = new int* [size];
-                for (int i = 0;i < size;i++)
-                {
-                    matrix[i] = new int[size];
-                    for (int j = 0;j < size;j++)
-                    {
-                        matrix[i][j] = 0;
-                    }
-                }
-            }
-            else if (count < size)
-            {
-                resize();
-            }
         }
         matrix[i][j] = 1;
         matrix[j][i] = 1;
     }
-
-    ~Graph()
-    {
-        for (int i = 0;i < count;i++)
-        {
-            delete[] matrix[i];
-        }
-        delete[] matrix;
-        delete[] vertex;
-    }
-
 };
-
 
 
 int main()
 {
-    //그래프의 표현
-    // 
-    //인접 행렬
-    //2차원 배열로 그래프를 나타내는 자료 구조
-    //노드의 개수를 n이라고 할 때 n*n 크기의 행렬을 사용해
-    //노드 사이의 연결을 표현
-    // 연결된 노드끼리는 1, 단절은 0
-    // 
-    // 0 - 1
-    //    /ㅣ
-    // 3 - 2
-    // 
-    //     0  1  2  3
-    // 0  0  1  0  0
-    // 1  1  0  1  1
-    // 2  0  1  0  1
-    // 3  0  1  1  0
-
     Graph<char> graph;
 
     graph.push('A');
     graph.push('B');
     graph.push('C');
-
-    graph.edge(0, 1);
-    graph.edge(1, 2);
+    graph.push('D');
 
     return 0;
 }
