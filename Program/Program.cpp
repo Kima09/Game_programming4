@@ -2,10 +2,10 @@
 
 using namespace std;
 
-template<typename T>
+template <typename T>
 
 int main()
 {
 
-    return 0;
+	return 0;
 }
